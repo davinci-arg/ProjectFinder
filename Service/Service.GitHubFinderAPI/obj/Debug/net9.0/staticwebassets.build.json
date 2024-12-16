@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "QX/lYZ+NZPCC7BxjFEfOqFmNhDjhswtuau5l2DMdcIs=",
+  "Source": "Service.GitHubFinderAPI",
+  "BasePath": "_content/Service.GitHubFinderAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

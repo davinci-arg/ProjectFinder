@@ -1,0 +1,71 @@
+@model IEnumerable<RepositoryDto>
+
+@{
+    var searchString = ViewData["Search"] as string;
+}
+
+<div class="container">
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var repository in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header">
+                            <h5 class="my-0 font-weight-normal">@repository.Name</h5>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title">Author: @repository.Owner.Author</h6>
+                            <h6 class="card-text">Stargazers: @repository.Stargazers</h6>
+                            <h6 class="card-text">Watchers: @repository.Watchers</h6>
+                            <a href="@repository.RepositoryUrl" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('searchInput');
+        var resetButton = document.getElementById('resetButton');
+        resetButton.style = style="visibility: visible";
+        var previousSearch = '@searchString'; 
+
+        if (previousSearch) {
+            searchInput.placeholder = previousSearch;
+        }
+    });
+
+    $(document).ready(function () {
+        $('#resetButton').click(function () {
+            var search = '@searchString';
+            var resetButton = document.getElementById('searchInput');
+
+            if(search == resetButton.placeholder){
+
+            if (confirm('Вы уверены, что хотите удалить найденые элементы?')) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "GitHubFinder")', 
+                    type: 'DELETE',
+                    data:{projectName:search},
+                    success: function (response) {
+                        alert("Элементы удалены успешно.");
+                    },
+                    error: function () {
+                        alert('Ошибка при удалении элемента.');
+                    }
+                });
+            }
+
+            document.querySelector('.container').innerHTML = '';
+            resetButton.placeholder = 'Поиск...';
+            resetButton.focus();
+            }
+        });
+    });
+</script>

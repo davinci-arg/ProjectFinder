@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/ProjectFinder.Web.props" />
+</Project>

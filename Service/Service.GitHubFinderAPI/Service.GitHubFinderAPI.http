@@ -1,0 +1,6 @@
+@Service.GitHubFinderAPI_HostAddress = http://localhost:5099
+
+GET {{Service.GitHubFinderAPI_HostAddress}}/swagger/
+Accept: application/json
+
+###

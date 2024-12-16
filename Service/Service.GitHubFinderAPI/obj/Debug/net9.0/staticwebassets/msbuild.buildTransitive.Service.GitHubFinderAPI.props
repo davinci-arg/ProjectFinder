@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/Service.GitHubFinderAPI.props" />
+</Project>
