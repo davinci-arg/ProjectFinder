@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.GitHubFinderAPI", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectFinder.Web", "FrontEnd\ProjectFinder.Web\ProjectFinder.Web.csproj", "{3F688A82-BA62-48B7-9216-361E6D2E9C63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.AuthAPI", "Service\Service.AuthAPI\Service.AuthAPI.csproj", "{C1BA541D-F4A4-4C50-B5FD-B513AB550412}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,9 +30,14 @@ Global
 		{3F688A82-BA62-48B7-9216-361E6D2E9C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F688A82-BA62-48B7-9216-361E6D2E9C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F688A82-BA62-48B7-9216-361E6D2E9C63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1BA541D-F4A4-4C50-B5FD-B513AB550412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1BA541D-F4A4-4C50-B5FD-B513AB550412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1BA541D-F4A4-4C50-B5FD-B513AB550412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1BA541D-F4A4-4C50-B5FD-B513AB550412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E8C501DC-94D7-4EC2-9C19-2E3CA2B5C319} = {C87797C4-3769-435F-9F51-7A7FCA248803}
 		{3F688A82-BA62-48B7-9216-361E6D2E9C63} = {F797D1E4-1723-4743-8198-814BDA07854D}
+		{C1BA541D-F4A4-4C50-B5FD-B513AB550412} = {C87797C4-3769-435F-9F51-7A7FCA248803}
 	EndGlobalSection
 EndGlobal
