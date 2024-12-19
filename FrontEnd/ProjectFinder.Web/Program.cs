@@ -10,8 +10,9 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 //
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
-//builder.Services.AddHttpClient<IGitHubAPIService, GitHubAPIService>();
-//builder.Services.AddHttpClient<IGitHubFinderService, GitHubFinderService>();
+builder.Services.AddHttpClient<IGitHubAPIService, GitHubAPIService>();
+builder.Services.AddHttpClient<IGitHubFinderService, GitHubFinderService>();
+builder.Services.AddHttpClient<IAuthService, AuthService>();
 
 // Api services
 SD.GitHubSearchRepositoryAPI = builder.Configuration["ServiceUrls:GitHubSearchRepositoryAPI"];
@@ -20,6 +21,8 @@ SD.AuthAPIService = builder.Configuration["ServiceUrls:AuthAPIService"];
 
 // Register services
 builder.Services.AddScoped<IBaseService, BaseService>();
+builder.Services.AddScoped<IBaseService, GitHubService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IBaseService, GitHubService>();
 builder.Services.AddScoped<IGitHubAPIService, GitHubAPIService>();
 builder.Services.AddScoped<IGitHubFinderService, GitHubFinderService>();

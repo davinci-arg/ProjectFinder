@@ -43,8 +43,27 @@ public class AuthAPIController : ControllerBase
             _responseDto.Message = "Username или password введены неверно";
             return BadRequest(_responseDto);
         }
+
         _responseDto.Result = loginResponse;
         return Ok(_responseDto);
     }
+
+    [HttpPost("assign")]
+    public async Task<IActionResult> AssignRole([FromBody] RegistrationRequestDto model)
+    {
+        var assignRoleSuccessful = await _authService.AssignRole(model.Email, model.Role.ToUpper());
+
+        if (assignRoleSuccessful)
+        {
+            _responseDto.Success = false;
+            _responseDto.Message = "Error encountered";
+            return BadRequest(_responseDto);
+        }
+
+        _responseDto.Result = assignRoleSuccessful;
+        return Ok(_responseDto);
+    }
+
+
 
 }
