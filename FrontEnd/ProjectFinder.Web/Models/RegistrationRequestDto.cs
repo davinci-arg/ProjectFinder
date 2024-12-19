@@ -1,4 +1,4 @@
-namespace Service.AuthAPI.Models.Dto;
+namespace ProjectFinder.Web.Models;
 
 public class RegistrationRequestDto
 {
