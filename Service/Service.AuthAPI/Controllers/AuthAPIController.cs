@@ -17,8 +17,8 @@ public class AuthAPIController : ControllerBase
         _responseDto = new ResponseDto();
     }
 
-    [HttpPost("registor")]
-    public async Task<IActionResult> Registor([FromBody] RegistrationRequestDto model)
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegistrationRequestDto model)
     {
         var result = await _authService.Register(model);
 

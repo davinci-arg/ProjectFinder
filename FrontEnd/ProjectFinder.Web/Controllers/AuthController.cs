@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjectFinder.Web.Models;
 using ProjectFinder.Web.Service.IService;
+using ProjectFinder.Web.Utility;
 
 namespace ProjectFinder.Web.Controllers;
 
@@ -28,9 +30,49 @@ public class AuthController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Register(RegistrationRequestDto registrationRequestDto)
+    public async Task<IActionResult> Register()
     {
-        await _authService.Register(registrationRequestDto);
+        var roleList = new List<SelectListItem>()
+        {
+            new SelectListItem(){Text = SD.ADMINISTRATOR, Value = SD.ADMINISTRATOR},
+            new SelectListItem(){Text = SD.COSTUMER, Value = SD.COSTUMER}
+        };
+
+        ViewBag.RoleList = roleList;
+
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Register(RegistrationRequestDto model)
+    {
+        ResponseDto responseRegister = await _authService.Register(model);
+        ResponseDto assingRole;
+
+        if (responseRegister.IsSuccess && responseRegister != null)
+        {
+            if (string.IsNullOrEmpty(model.Role))
+            {
+                model.Role = SD.COSTUMER;
+            }
+
+            assingRole = await _authService.AssignRole(model);
+
+            if (assingRole.IsSuccess && assingRole != null)
+            {
+                TempData["success"] = "Registration seccessful";
+                return RedirectToAction(nameof(Login));
+            }
+        }
+
+        var roleList = new List<SelectListItem>()
+        {
+            new SelectListItem(){Text = SD.ADMINISTRATOR, Value = SD.ADMINISTRATOR},
+            new SelectListItem(){Text = SD.COSTUMER, Value = SD.COSTUMER}
+        };
+
+        ViewBag.RoleList = roleList;
+
         return View();
     }
 }

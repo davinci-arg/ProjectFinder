@@ -1,8 +1,6 @@
 @model RegistrationRequestDto
-@Html.AntiForgeryToken()
 
-<form method="get">
-    @Html.AntiForgeryToken() 
+<form method="post">
     <div class="container border p-4">
         <div class="row text-center p-3">
             <h1>Register</h1>
@@ -25,10 +23,13 @@
                     <option disabled selected>--Select Role--</option>
                 </select>
             </div>
-
-            <div class="col-12 col-md-6 offset-md-3 pb-2">
-                <button type="submit" class="form-control btn btn-success" value="Submit">Register</button>
+            <div class="col-12 col-md-6 offset-md-3 pb-2" >
+                <button class="form-control btn btn-success" type="submit">Register</button>
             </div>
         </div>
     </div>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -3,30 +3,32 @@
 @{
     var searchString = ViewData["Search"] as string;
 }
+<form method="get">
 
-<div class="container border p-4">
-    <div class="row">
-        @if (Model != null && Model.Any())
-        {
-            foreach (var repository in Model)
+    <div class="container border p-4">
+        <div class="row">
+            @if (Model != null && Model.Any())
             {
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-header">
-                            <h5 class="my-0 font-weight-normal">@repository.Name</h5>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title">Author: @repository.Owner.Author</h6>
-                            <h6 class="card-text">Stargazers: @repository.Stargazers</h6>
-                            <h6 class="card-text">Watchers: @repository.Watchers</h6>
-                            <a href="@repository.RepositoryUrl" class="btn btn-primary">View Details</a>
+                foreach (var repository in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-header">
+                                <h5 class="my-0 font-weight-normal">@repository.Name</h5>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Author: @repository.Owner.Author</h6>
+                                <h6 class="card-text">Stargazers: @repository.Stargazers</h6>
+                                <h6 class="card-text">Watchers: @repository.Watchers</h6>
+                                <a href="@repository.RepositoryUrl" class="btn btn-primary">View Details</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        }    
+                }
+            }    
+        </div>
     </div>
-</div>
+</form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -69,3 +71,7 @@
         });
     });
 </script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
