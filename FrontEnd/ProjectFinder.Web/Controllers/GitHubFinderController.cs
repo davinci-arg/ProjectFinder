@@ -1,9 +1,7 @@
-using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ProjectFinder.Web.Models;
 using ProjectFinder.Web.Service.IService;
-using ProjectFinder.Web.Utility;
 
 namespace ProjectFinder.Web.Controllers;
 
@@ -19,14 +17,22 @@ public class GitHubFinderController : Controller
         _gitHubAPIService = gitHubAPIService;
     }
 
+    public IActionResult Finder()
+    {
+        return View();
+    }
+
     [HttpGet]
     public async Task<IActionResult> Repositories(GitHubFinderDto gitHubFinderDto)
     {
         if (string.IsNullOrWhiteSpace(gitHubFinderDto.ProjectName))
         {
-            return View();
+            TempData["error"] = "Введите текст";
+            return Finder();
         }
 
+        //ViewData["Search"] = gitHubFinderDto.ProjectName;
+        ViewData["FinderModel"] = gitHubFinderDto;
         List<RepositoryDto> repositories = new();
         ResponseDto response = await _gitHubFinderService.FindAsync(gitHubFinderDto.ProjectName);
 
@@ -38,7 +44,6 @@ public class GitHubFinderController : Controller
         }
 
         repositories = JsonConvert.DeserializeObject<List<RepositoryDto>>(Convert.ToString(response.Result));
-        ViewData["Search"] = gitHubFinderDto.ProjectName;
 
         return View(repositories);
     }
@@ -51,6 +56,7 @@ public class GitHubFinderController : Controller
             return BadRequest();
         }
 
+        await _gitHubFinderService.DeleteAsync(projectName);
         return Ok(projectName);
     }
 

@@ -22,6 +22,30 @@ public class GitHubFinderAPIController : ControllerBase
         _response = new ResponseDto();
     }
 
+    [HttpGet]
+    public ResponseDto Get()
+    {
+        try
+        {
+            List<RepositoryDto> repositories = new();
+            var gitHubFinders = _db.GitHubFinders.Select(p => p.Repositories);
+
+            foreach (var repository in gitHubFinders)
+            {
+                repositories.AddRange(JsonConvert.DeserializeObject<RepositoryRootDto>(repository).Repositories);
+            }
+
+            _response.Result = repositories;
+        }
+        catch (Exception ex)
+        {
+            _response.Message = ex.Message;
+            _response.Success = false;
+        }
+
+        return _response;
+    }
+
     [HttpGet("{nameFinder}")]
     public ResponseDto Get(string nameFinder)
     {
@@ -59,12 +83,12 @@ public class GitHubFinderAPIController : ControllerBase
         return _response;
     }
 
-    [HttpDelete]
-    public ResponseDto Delete(string nameFinder)
+    [HttpDelete("{id}")]
+    public ResponseDto Delete(string id)
     {
         try
         {
-            _db.GitHubFinders.Remove(_db.GitHubFinders.First(f => f.ProjectName.ToLower() == nameFinder.ToLower()));
+            _db.GitHubFinders.Remove(_db.GitHubFinders.First(f => f.ProjectName.ToLower() == id.ToLower()));
             _db.SaveChanges();
             //_response.Result = nameFinder;
         }
