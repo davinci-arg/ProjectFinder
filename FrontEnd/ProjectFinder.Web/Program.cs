@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using ProjectFinder.Web.Service;
 using ProjectFinder.Web.Service.IService;
 using ProjectFinder.Web.Utility;
@@ -23,9 +24,18 @@ SD.AuthAPIService = builder.Configuration["ServiceUrls:AuthAPIService"];
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IBaseService, GitHubService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<IBaseService, GitHubService>();
 builder.Services.AddScoped<IGitHubAPIService, GitHubAPIService>();
 builder.Services.AddScoped<IGitHubFinderService, GitHubFinderService>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromHours(10);
+        options.LoginPath = "/Auth/Login";
+        options.LoginPath = "/Auth/Logout";
+        options.AccessDeniedPath = "/Auth/AccessDenied";
+    });
 
 var app = builder.Build();
 
@@ -39,7 +49,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

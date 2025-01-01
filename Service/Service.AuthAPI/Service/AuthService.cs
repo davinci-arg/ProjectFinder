@@ -40,7 +40,7 @@ public class AuthService : IAuthService
 
     public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
     {
-        var user = _db.Users.FirstOrDefault(u => u.UserName.ToLower() == loginRequestDto.UserName.ToLower());
+        var user = _db.Users.FirstOrDefault(u => u.Email.ToLower() == loginRequestDto.Email.ToLower());
         bool isValid = await _userManager.CheckPasswordAsync(user, loginRequestDto.Password);
 
         if (user == null || isValid == false)
@@ -48,7 +48,8 @@ public class AuthService : IAuthService
             return new LoginResponseDto() { User = null, Token = "" };
         }
 
-        var token = _jwtTokenGenerator.GenerateToken(user);
+        var roles = await _userManager.GetRolesAsync(user);
+        var token = _jwtTokenGenerator.GenerateToken(user, roles);
 
         UserDto userDto = new UserDto()
         {
@@ -69,8 +70,9 @@ public class AuthService : IAuthService
         ApplicationUser user = new()
         {
             UserName = registrationRequestDto.Email,
+            Email = registrationRequestDto.Email,
+            NormalizedEmail = registrationRequestDto.Email.ToUpper(),
             Name = registrationRequestDto.Name,
-            Email = registrationRequestDto.Email
         };
 
         try

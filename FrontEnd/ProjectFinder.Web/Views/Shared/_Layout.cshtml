@@ -26,15 +26,16 @@
                         @if(User.Identity != null && !User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="navbar-link text-dark me-2" asp-controller="Auth" asp-action="Login">Login</a>
+                                <a class="navbar-link me-2" asp-controller="Auth" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="navbar-link text-dark me-2" asp-controller="Auth" asp-action="Register">Register</a>
+                                <a class="navbar-link me-2" asp-controller="Auth" asp-action="Register">Register</a>
                             </li>
                         }
                         else if(User.Identity != null && User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
+                                <span class="navbar-text text-dark me-2">@User.Identity.Name | </span>
                                 <a class="navbar-link" asp-controller="Auth" asp-action="Logout">Logout</a>
                             </li>
                         }

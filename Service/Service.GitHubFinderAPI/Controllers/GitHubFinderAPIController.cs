@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Service.GitHubFinderAPI.Data;
@@ -84,6 +85,7 @@ public class GitHubFinderAPIController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "ADMIN")]
     public ResponseDto Delete(string id)
     {
         try
