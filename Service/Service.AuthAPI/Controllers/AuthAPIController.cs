@@ -17,14 +17,14 @@ public class AuthAPIController : ControllerBase
         _responseDto = new ResponseDto();
     }
 
-    [HttpPost("registor")]
-    public async Task<IActionResult> Registor([FromBody] RegistrationRequestDto model)
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegistrationRequestDto model)
     {
         var result = await _authService.Register(model);
 
         if (!string.IsNullOrEmpty(result))
         {
-            _responseDto.Success = false;
+            _responseDto.IsSuccess = false;
             _responseDto.Message = result;
             return BadRequest(_responseDto);
         }
@@ -39,7 +39,7 @@ public class AuthAPIController : ControllerBase
 
         if (loginResponse.User == null)
         {
-            _responseDto.Success = false;
+            _responseDto.IsSuccess = false;
             _responseDto.Message = "Username или password введены неверно";
             return BadRequest(_responseDto);
         }
@@ -53,9 +53,9 @@ public class AuthAPIController : ControllerBase
     {
         var assignRoleSuccessful = await _authService.AssignRole(model.Email, model.Role.ToUpper());
 
-        if (assignRoleSuccessful)
+        if (!assignRoleSuccessful)
         {
-            _responseDto.Success = false;
+            _responseDto.IsSuccess = false;
             _responseDto.Message = "Error encountered";
             return BadRequest(_responseDto);
         }

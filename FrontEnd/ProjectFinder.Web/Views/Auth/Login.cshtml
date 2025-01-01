@@ -1,17 +1,22 @@
 @model LoginRequestDto
 
-<form method="get">
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a asp-controller="GitHubFinder" asp-action="Finder">Finder</a></li>
+  <li class="breadcrumb-item active">Login</li>
+</ol>
+
+<form method="post">
     <div class="container border p-4">
         <div class="row text-center">
             <h1>Login</h1>
         </div>
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3 pb-2">
-                <input asp-for="UserName" class="form-control" placeholder="Username..."/>
-                <span asp-validation-for="UserName" class="text-danger" />
+                <input asp-for="Email" class="form-control" placeholder="Email..."/>
+                <span asp-validation-for="Email" class="text-danger" />
             </div>
             <div class="col-12 col-md-6 offset-md-3 pb-2">
-                <input asp-for="Password" class="form-control" placeholder="Password..." />
+                <input asp-for="Password" type="password" class="form-control" placeholder="Password..." />
                 <span asp-validation-for="Password" class="text-danger" />
             </div>
             <div class="col-12 col-md-6 offset-md-3 pb-2">
@@ -20,3 +25,7 @@
         </div>
     </div>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

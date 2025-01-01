@@ -16,7 +16,11 @@ public class GitHubFinderService : IGitHubFinderService
 
     public async Task<ResponseDto?> DeleteAsync(string projectName)
     {
-        throw new NotImplementedException();
+        return await _baseService.SendAsync(new RequestDto()
+        {
+            ApiType = SD.ApiType.DELETE,
+            Url = SD.GitHubFinderAPIService + "/api/find/" + projectName
+        });
     }
 
     public async Task<ResponseDto?> FindAsync(string projectName)

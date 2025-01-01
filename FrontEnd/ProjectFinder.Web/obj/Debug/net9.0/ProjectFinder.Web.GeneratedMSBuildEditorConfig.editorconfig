@@ -28,6 +28,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/Views/GitHubFinder/Finder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2l0SHViRmluZGVyL0ZpbmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/Views/GitHubFinder/Repositories.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR2l0SHViRmluZGVyL1JlcG9zaXRvcmllcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,6 +46,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/Views/Shared/_Notifications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Ob3RpZmljYXRpb25zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/Views/Shared/_ValidationScriptsPartial.cshtml]

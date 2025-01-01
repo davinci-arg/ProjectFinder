@@ -4,8 +4,9 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Service.AuthAPI.Models;
+using Service.AuthAPI.Service.IService;
 
-namespace Service.AuthAPI.Service.IService;
+namespace Service.AuthAPI.Service;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
@@ -15,8 +16,8 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     {
         _jwtOptions = jwtOptions.Value;
     }
-    
-    public string GenerateToken(ApplicationUser applicationUser)
+
+    public string GenerateToken(ApplicationUser applicationUser, IEnumerable<string> roles)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -26,8 +27,10 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         {
             new Claim(JwtRegisteredClaimNames.Email, applicationUser.Email),
             new Claim(JwtRegisteredClaimNames.Sub, applicationUser.Id),
-            new Claim(JwtRegisteredClaimNames.Name, applicationUser.UserName)
+            new Claim(JwtRegisteredClaimNames.Name, applicationUser.Name)
         };
+
+        claimList.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {

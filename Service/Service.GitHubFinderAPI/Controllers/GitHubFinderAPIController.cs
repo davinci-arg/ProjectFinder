@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Service.GitHubFinderAPI.Data;
@@ -20,6 +21,30 @@ public class GitHubFinderAPIController : ControllerBase
         _db = db;
         _mapper = mapper;
         _response = new ResponseDto();
+    }
+
+    [HttpGet]
+    public ResponseDto Get()
+    {
+        try
+        {
+            List<RepositoryDto> repositories = new();
+            var gitHubFinders = _db.GitHubFinders.Select(p => p.Repositories);
+
+            foreach (var repository in gitHubFinders)
+            {
+                repositories.AddRange(JsonConvert.DeserializeObject<RepositoryRootDto>(repository).Repositories);
+            }
+
+            _response.Result = repositories;
+        }
+        catch (Exception ex)
+        {
+            _response.Message = ex.Message;
+            _response.Success = false;
+        }
+
+        return _response;
     }
 
     [HttpGet("{nameFinder}")]
@@ -59,12 +84,13 @@ public class GitHubFinderAPIController : ControllerBase
         return _response;
     }
 
-    [HttpDelete]
-    public ResponseDto Delete(string nameFinder)
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "ADMIN")]
+    public ResponseDto Delete(string id)
     {
         try
         {
-            _db.GitHubFinders.Remove(_db.GitHubFinders.First(f => f.ProjectName.ToLower() == nameFinder.ToLower()));
+            _db.GitHubFinders.Remove(_db.GitHubFinders.First(f => f.ProjectName.ToLower() == id.ToLower()));
             _db.SaveChanges();
             //_response.Result = nameFinder;
         }

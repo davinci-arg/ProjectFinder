@@ -1,71 +1,89 @@
 @model IEnumerable<RepositoryDto>
 
 @{
-    var searchString = ViewData["Search"] as string;
+    var finder = ViewData["FinderModel"] as GitHubFinderDto;
 }
 
-<div class="container border p-4">
-    <div class="row">
-        @if (Model != null && Model.Any())
-        {
-            foreach (var repository in Model)
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a asp-controller="GitHubFinder" asp-action="Finder">Finder</a></li>
+  <li class="breadcrumb-item active">Repositories</li>
+</ol>
+
+<partial name="Finder" model=finder />
+
+<br />
+
+<div>
+<form method="get">
+    <div class="container border p-4">  
+        <div class="row text-center">
+            @if (Model != null && Model.Count() > 0)
             {
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-header">
-                            <h5 class="my-0 font-weight-normal">@repository.Name</h5>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title">Author: @repository.Owner.Author</h6>
-                            <h6 class="card-text">Stargazers: @repository.Stargazers</h6>
-                            <h6 class="card-text">Watchers: @repository.Watchers</h6>
-                            <a href="@repository.RepositoryUrl" class="btn btn-primary">View Details</a>
+                <p>@Model.Count() repositories found </p>
+            }
+            else
+            {
+                <p>No repositories found for '@(finder != null ? finder.ProjectName : "unknown project")'</p>
+            }
+        </div> 
+        <div class="row">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var repository in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-header">
+                                <h5 class="my-0 font-weight-normal">@repository.Name</h5>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">Author: @repository.Owner.Author</h6>
+                                <h6 class="card-text">Stargazers: @repository.Stargazers</h6>
+                                <h6 class="card-text">Watchers: @repository.Watchers</h6>
+                                <a href="@repository.RepositoryUrl" class="btn btn-primary">View Details</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        }    
+                }
+            }   
+        </div>
     </div>
+</form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var searchInput = document.getElementById('searchInput');
-        var resetButton = document.getElementById('resetButton');
-        resetButton.style = style="visibility: visible";
-        var previousSearch = '@searchString'; 
-
-        if (previousSearch) {
-            searchInput.placeholder = previousSearch;
+    document.addEventListener('DOMContentLoaded',function () {
+      var searchInput = document.getElementById("searchInput");
+      var resetSpan = document.getElementById("resetSpan");
+      resetSpan.style.display = "inline";
+        if (searchInput) {
+            searchInput.placeholder = '@(finder != null ? finder.ProjectName : "git's project name...")';
         }
     });
+</script> 
 
-    $(document).ready(function () {
-        $('#resetButton').click(function () {
-            var search = '@searchString';
-            var resetButton = document.getElementById('searchInput');
-
-            if(search == resetButton.placeholder){
-
-            if (confirm('Вы уверены, что хотите удалить найденые элементы?')) {
-                $.ajax({
-                    url: '@Url.Action("Delete", "GitHubFinder")', 
-                    type: 'DELETE',
-                    data:{projectName:search},
-                    success: function (response) {
-                        alert("Элементы удалены успешно.");
-                    },
-                    error: function () {
-                        alert('Ошибка при удалении элемента.');
-                    }
-                });
-            }
-
-            document.querySelector('.container').innerHTML = '';
-            resetButton.placeholder = 'Поиск...';
-            resetButton.focus();
-            }
-        });
-    });
+<script>
+    function resetForm() {
+        var search = document.getElementById("searchInput");
+        if(confirm("Are you sure you want to reset and delete the found projects?")) {
+            $.ajax({
+                url: '@Url.Action("Delete", "GitHubFinder")', 
+                type: 'DELETE',
+                data: { projectName: search.placeholder },
+                success: function (response) {
+                    document.querySelector('.container.border.p-4').innerHTML = '';
+                    search.placeholder = "git's project name...";
+                    search.focus();
+                    alert("Projects deleted successfully.");
+                },
+                error: function () {
+                    alert('Error deleting projects.');
+                }
+            });
+        }
+    }
 </script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

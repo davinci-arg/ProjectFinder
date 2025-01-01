@@ -13,7 +13,7 @@ public class AuthService : IAuthService
         _baseService = services.First(service => service is BaseService);
     }
 
-    public async Task<ResponseDto> AssignRole(RegistrationRequestDto registrationRequestDto)
+    public async Task<ResponseDto> AssignRoleAsync(RegistrationRequestDto registrationRequestDto)
     {
         return await _baseService.SendAsync(new RequestDto()
         {
@@ -23,7 +23,7 @@ public class AuthService : IAuthService
         });
     }
 
-    public async Task<ResponseDto> Login(LoginRequestDto loginRequestDto)
+    public async Task<ResponseDto> LoginAsync(LoginRequestDto loginRequestDto)
     {
         return await _baseService.SendAsync(new RequestDto()
         {
@@ -33,7 +33,7 @@ public class AuthService : IAuthService
         });
     }
 
-    public async Task<ResponseDto> Register(RegistrationRequestDto registrationRequestDto)
+    public async Task<ResponseDto> RegisterAsync(RegistrationRequestDto registrationRequestDto)
     {
         return await _baseService.SendAsync(new RequestDto()
         {

@@ -1,0 +1,34 @@
+
+@* @model GitHubFinderDto *@
+
+<div class="text-center">
+    <h1>Git Finder</h1>
+    <p>Find git's project by name project</p> 
+    <div class="row justify-content-center">
+        <div class="col-md-6 mx-auto">
+            <form class="input-group col-md-6" asp-controller="GitHubFinder" asp-action="Repositories" method="get" onsubmit="return searchForm()">
+                <input class="form-control" type="search" id="searchInput" name="ProjectName" placeholder="git's project name..." aria-label="git's project name">
+                <span class="input-group-text">
+                    <button class="btn btn-link text-dark px-3" type="submit" name="ProjectName" id="searchButton"><i class="bi bi-search"></i></button>
+                </span>
+                <span class="input-group-text text-danger" style="display: none;" id="resetSpan">
+                    <button class="btn btn-link text-danger px-3" type="button" id="resetButton" onclick="resetForm()"><i class="bi bi-arrow-clockwise"></i></button>
+                </span>
+            </form>
+
+            <script>
+                function searchForm() {
+                    var projectName = document.getElementById("searchInput").value;
+                    if (projectName.trim() === "") {
+                        alert("Project name cannot be empty");
+                        return false;
+                    }
+                    return true;
+                }
+            </script>       
+    </div>   
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

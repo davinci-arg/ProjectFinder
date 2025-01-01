@@ -871,3 +871,8 @@
 /Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/obj/Debug/net9.0/ProjectFinder.Web.genruntimeconfig.cache
 /Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/obj/Debug/net9.0/ref/ProjectFinder.Web.dll
 /Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/obj/Debug/net9.0/ProjectFinder.Web.sourcelink.json
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/FrontEnd/ProjectFinder.Web/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
