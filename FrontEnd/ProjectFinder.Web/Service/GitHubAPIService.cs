@@ -12,7 +12,8 @@ public class GitHubAPIService : IGitHubAPIService
 
     public GitHubAPIService(IEnumerable<IBaseService> services)
     {
-        _baseService = services.First(service => service is GitHubService);
+        _baseService = services.First(service => service is BaseService);
+        //_baseService = services.First(service => service is GitHubService);
     }
 
     public async Task<ResponseDto> GetRepositoriesAsync(string search)
@@ -20,7 +21,9 @@ public class GitHubAPIService : IGitHubAPIService
         return await _baseService.SendAsync(new RequestDto()
         {
             ApiType = SD.ApiType.GET,
-            Url = SD.GitHubSearchRepositoryAPI + search
-        });
+            Url = SD.GitHubSearchRepositoryAPI + search,
+            Header = new KeyValuePair<string, string>("User-Agent", "application/json"),
+            ServiceType = ServiceType.EXTERNAL
+        }, withBearer: false);
     }
 }

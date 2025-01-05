@@ -12,4 +12,8 @@ public class SD
     {
         GET, POST, PUT, DELETE
     }
+    public enum ServiceType
+    {
+        EXTERNAL, INTERNAL
+    }
 }

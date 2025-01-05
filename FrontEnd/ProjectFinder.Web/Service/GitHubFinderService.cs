@@ -19,7 +19,8 @@ public class GitHubFinderService : IGitHubFinderService
         return await _baseService.SendAsync(new RequestDto()
         {
             ApiType = SD.ApiType.DELETE,
-            Url = SD.GitHubFinderAPIService + "/api/find/" + projectName
+            Url = SD.GitHubFinderAPIService + "/api/find/" + projectName,
+            Header = new KeyValuePair<string, string>("Accept", "application/json")
         });
     }
 
@@ -28,7 +29,8 @@ public class GitHubFinderService : IGitHubFinderService
         return await _baseService.SendAsync(new RequestDto()
         {
             ApiType = SD.ApiType.GET,
-            Url = SD.GitHubFinderAPIService + "/api/find/" + projectName
+            Url = SD.GitHubFinderAPIService + "/api/find/" + projectName,
+            Header = new KeyValuePair<string, string>("Accept", "application/json")
         });
     }
 
@@ -38,7 +40,8 @@ public class GitHubFinderService : IGitHubFinderService
         {
             ApiType = SD.ApiType.POST,
             Data = gitHubFinderDto,
-            Url = SD.GitHubFinderAPIService + "/api/find/"
+            Url = SD.GitHubFinderAPIService + "/api/find/",
+            Header = new KeyValuePair<string, string>("Accept", "application/json")
         });
     }
 }

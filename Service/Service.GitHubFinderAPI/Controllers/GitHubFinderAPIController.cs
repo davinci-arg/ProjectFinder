@@ -10,6 +10,7 @@ namespace Service.GitHubFinderAPI.Controllers;
 
 [ApiController]
 [Route("api/find")]
+[Authorize(AuthenticationSchemes = "Bearer")]
 public class GitHubFinderAPIController : ControllerBase
 {
     private readonly AppDbContext _db;
@@ -22,6 +23,7 @@ public class GitHubFinderAPIController : ControllerBase
         _mapper = mapper;
         _response = new ResponseDto();
     }
+
 
     [HttpGet]
     public ResponseDto Get()
@@ -85,7 +87,7 @@ public class GitHubFinderAPIController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMINISTRATOR")]
     public ResponseDto Delete(string id)
     {
         try
