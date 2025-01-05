@@ -5,7 +5,6 @@ using ProjectFinder.Web.Service.IService;
 
 namespace ProjectFinder.Web.Controllers;
 
-
 public class GitHubFinderController : Controller
 {
     private readonly IGitHubFinderService _gitHubFinderService;
@@ -23,15 +22,15 @@ public class GitHubFinderController : Controller
     }
 
     [HttpGet]
+    // [Authorize(Roles = $"{SD.ADMINISTRATOR},{SD.COSTUMER}")]
     public async Task<IActionResult> Repositories(GitHubFinderDto gitHubFinderDto)
     {
         if (string.IsNullOrWhiteSpace(gitHubFinderDto.ProjectName))
         {
             TempData["error"] = "Введите текст";
-            return Finder();
+            return RedirectToAction(nameof(Finder));
         }
 
-        //ViewData["Search"] = gitHubFinderDto.ProjectName;
         ViewData["FinderModel"] = gitHubFinderDto;
         List<RepositoryDto> repositories = new();
         ResponseDto response = await _gitHubFinderService.FindAsync(gitHubFinderDto.ProjectName);
@@ -43,7 +42,15 @@ public class GitHubFinderController : Controller
             response = await _gitHubFinderService.SaveAsync(gitHubFinderDto);
         }
 
-        repositories = JsonConvert.DeserializeObject<List<RepositoryDto>>(Convert.ToString(response.Result));
+        if (response.Result != null && response.IsSuccess)
+        {
+            repositories = JsonConvert.DeserializeObject<List<RepositoryDto>>(Convert.ToString(response.Result));
+        }
+        else
+        {
+            TempData["error"] = response.Message;
+            return RedirectToAction(nameof(Finder));
+        }
 
         return View(repositories);
     }
@@ -59,5 +66,4 @@ public class GitHubFinderController : Controller
         await _gitHubFinderService.DeleteAsync(projectName);
         return Ok(projectName);
     }
-
 }

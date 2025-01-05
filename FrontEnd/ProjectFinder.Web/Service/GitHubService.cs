@@ -16,13 +16,15 @@ public class GitHubService : IBaseService
         _httpClientFactory = httpClientFactory;
     }
 
-    public async Task<ResponseDto>? SendAsync(RequestDto requestDto)
+    public async Task<ResponseDto>? SendAsync(RequestDto requestDto, bool withBearer = true)
     {
         try
         {
             HttpClient client = _httpClientFactory.CreateClient("GitHubService");
             HttpRequestMessage message = new();
-            message.Headers.Add("User-Agent", "application/json");
+
+            //message.Headers.Add("User-Agent", "application/json");
+            message.Headers.Add(requestDto.Header.Key, requestDto.Header.Value);
 
             message.RequestUri = new Uri(requestDto.Url);
 

@@ -251,3 +251,15 @@
 /Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/obj/Debug/net9.0/Service.GitHubFinderAPI.genruntimeconfig.cache
 /Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/obj/Debug/net9.0/ref/Service.GitHubFinderAPI.dll
 /Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/obj/Debug/net9.0/Service.GitHubFinderAPI.sourcelink.json
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Serilog.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Serilog.Extensions.Hosting.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Serilog.Extensions.Logging.dll
+/Users/konstantinlavrushov/Developer/GIT/davinci/ProjectFinder/Service/Service.GitHubFinderAPI/bin/Debug/net9.0/Serilog.Sinks.Console.dll

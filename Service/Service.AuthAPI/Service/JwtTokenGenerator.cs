@@ -10,7 +10,7 @@ namespace Service.AuthAPI.Service;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
-    readonly JwtOptions _jwtOptions;
+    private readonly JwtOptions _jwtOptions;
 
     public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions)
     {
@@ -38,7 +38,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             Issuer = _jwtOptions.Issuer,
             Subject = new ClaimsIdentity(claimList),
             Expires = DateTime.UtcNow.AddDays(7),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes128CbcHmacSha256)
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);

@@ -19,7 +19,8 @@ public class AuthService : IAuthService
         {
             ApiType = SD.ApiType.POST,
             Data = registrationRequestDto,
-            Url = SD.AuthAPIService + "/api/auth/assign/"
+            Url = SD.AuthAPIService + "/api/auth/assign/",
+            Header = new KeyValuePair<string, string>("Accept", "application/json")
         });
     }
 
@@ -29,7 +30,8 @@ public class AuthService : IAuthService
         {
             ApiType = SD.ApiType.POST,
             Data = loginRequestDto,
-            Url = SD.AuthAPIService + "/api/auth/login/"
+            Url = SD.AuthAPIService + "/api/auth/login/",
+            Header = new KeyValuePair<string, string>("Accept", "application/json")
         });
     }
 
@@ -39,7 +41,8 @@ public class AuthService : IAuthService
         {
             ApiType = SD.ApiType.POST,
             Data = registrationRequestDto,
-            Url = SD.AuthAPIService + "/api/auth/register/"
+            Url = SD.AuthAPIService + "/api/auth/register/",
+            Header = new KeyValuePair<string, string>("Accept", "application/json")
         });
     }
 }

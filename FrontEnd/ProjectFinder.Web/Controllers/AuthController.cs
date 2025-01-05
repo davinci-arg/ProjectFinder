@@ -68,14 +68,7 @@ public class AuthController : Controller
     [HttpGet]
     public async Task<IActionResult> Register()
     {
-        var roleList = new List<SelectListItem>()
-        {
-            new SelectListItem(){Text = SD.ADMINISTRATOR, Value = SD.ADMINISTRATOR},
-            new SelectListItem(){Text = SD.COSTUMER, Value = SD.COSTUMER}
-        };
-
-        ViewBag.RoleList = roleList;
-
+        SetRoleList();
         return View();
     }
 
@@ -105,17 +98,11 @@ public class AuthController : Controller
             TempData["error"] = result?.Message ?? "An error occurred during registration.";
         }
 
-        // var roleList = new List<SelectListItem>()
-        // {
-        //     new SelectListItem(){Text = SD.ADMINISTRATOR, Value = SD.ADMINISTRATOR},
-        //     new SelectListItem(){Text = SD.COSTUMER, Value = SD.COSTUMER}
-        // };
-
-        // ViewBag.RoleList = roleList;
-
+        SetRoleList();
         return View();
     }
 
+    #region user authentication
     private async Task SingInUser(LoginResponseDto model)
     {
         var handler = new JwtSecurityTokenHandler();
@@ -138,4 +125,16 @@ public class AuthController : Controller
 
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
     }
+
+    private void SetRoleList()
+    {
+        var roleList = new List<SelectListItem>()
+        {
+            new SelectListItem(){Text = SD.ADMINISTRATOR, Value = SD.ADMINISTRATOR},
+            new SelectListItem(){Text = SD.COSTUMER, Value = SD.COSTUMER}
+        };
+
+        ViewBag.RoleList = roleList;
+    }
+    #endregion
 }
