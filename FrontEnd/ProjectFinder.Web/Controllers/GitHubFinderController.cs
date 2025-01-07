@@ -27,7 +27,7 @@ public class GitHubFinderController : Controller
     {
         if (string.IsNullOrWhiteSpace(gitHubFinderDto.ProjectName))
         {
-            TempData["error"] = "Введите текст";
+            TempData["error"] = "please enter a project name";
             return RedirectToAction(nameof(Finder));
         }
 

@@ -47,6 +47,7 @@ public class AuthController : Controller
 
             await SingInUser(loginResponse);
             _tokenProvider.SetToken(loginResponse.Token);
+            TempData["success"] = "Login seccessful";
 
             return RedirectToAction("Finder", "GitHubFinder");
         }
