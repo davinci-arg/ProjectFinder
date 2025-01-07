@@ -24,7 +24,6 @@ public class GitHubFinderAPIController : ControllerBase
         _response = new ResponseDto();
     }
 
-
     [HttpGet]
     public ResponseDto Get()
     {
@@ -73,6 +72,14 @@ public class GitHubFinderAPIController : ControllerBase
         try
         {
             var root = JsonConvert.DeserializeObject<RepositoryRootDto>(gitHubFinderDto.Repositories);
+
+            if (root.Repositories.Count == 0)
+            {
+                _response.Message = $"Repositories {gitHubFinderDto.ProjectName} do not exist";
+                _response.Success = false;
+                return _response;
+            }
+
             _db.GitHubFinders.Add(_mapper.Map<GitHubFinder>(gitHubFinderDto));
             _db.SaveChanges();
             _response.Result = root.Repositories;

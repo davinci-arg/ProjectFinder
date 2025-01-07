@@ -40,7 +40,7 @@ public class AuthAPIController : ControllerBase
         if (loginResponse.User == null)
         {
             _responseDto.IsSuccess = false;
-            _responseDto.Message = "Username или password введены неверно";
+            _responseDto.Message = "Username or password is incorrect";
             return BadRequest(_responseDto);
         }
 
