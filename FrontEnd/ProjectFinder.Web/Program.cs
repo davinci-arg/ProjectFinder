@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IGitHubAPIService, GitHubAPIService>();
-//builder.Services.AddHttpClient<IGitHubFinderService, GitHubFinderService>();
+builder.Services.AddHttpClient<IGitHubFinderService, GitHubFinderService>();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 
 // Api services
